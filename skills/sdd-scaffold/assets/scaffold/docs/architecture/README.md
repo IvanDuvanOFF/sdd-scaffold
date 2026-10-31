@@ -1,9 +1,10 @@
-# Архитектура проекта
+# Project architecture
 
-Назначение продукта, стек и архитектура пока не определены.
-Этот документ — место для общего описания после согласования с человеком.
+The product's purpose, stack, and architecture are not yet defined.
+This document holds the overall description after human approval.
 
-Здесь фиксируются контекст, основные части, их взаимодействие, потоки данных,
-внешние зависимости и архитектурные ограничения. Детали компонентов находятся
-в [components](components/README.md). Documenter обновляет описание по реализации
-утверждённых изменений, не изобретает архитектуру при заполнении заготовки.
+Record context, major parts, their interactions, data flows, external dependencies,
+and architectural constraints. Component details belong in
+[components](components/README.md). Documenter updates the description based on
+implementation of approved changes and does not invent architecture when filling
+the scaffold.

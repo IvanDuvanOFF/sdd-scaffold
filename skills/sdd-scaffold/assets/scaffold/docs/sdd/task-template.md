@@ -1,33 +1,33 @@
-# <task-id>: <поручение>
+# <task-id>: <assignment>
 
-- Агент: <постоянное имя>
-- Роль: <раздел AGENTS.md или docs/agents/<agent-name>.md>
-- Спецификация: <docs/specs/<id>.md>, версия <n>, согласование <ссылка>
-- Критерии: <AC-* либо вопрос исследования>
-- Состояние: pending
-- Зависимости: <условия запуска>
-- Постоянный отчёт: <docs/changelog/<agent-name>/датированное-имя.md>
+- Agent: <stable name>
+- Role: <AGENTS.md section or docs/agents/<agent-name>.md>
+- Specification: <docs/specs/<id>.md>, version <n>, approval <link>
+- Criteria: <AC-* or investigation question>
+- Status: pending
+- Dependencies: <launch prerequisites>
+- Permanent report: <docs/changelog/<agent-name>/dated-filename.md>
 
-## Поручение и готовность
+## Assignment and completion
 
-<Конкретный результат, критерии готовности, кто и как проверяет.
-Реализация требует согласованной спецификации.>
+<Specific result, completion criteria, and who verifies it and how.
+Implementation requires an approved specification.>
 
-## Границы
+## Boundaries
 
-- Читать: <пути/источники>
-- Менять: <точные пути; пусто = запрет записи>
-- Создавать: <файлы/ограниченные директории, включая отчёт>
-- Удалять: <по умолчанию ничего>
-- Команды: <команды, рабочая директория, побочные записи>
-- Запрещено: <дополнительные ограничения>
-- Вложенное делегирование: запрещено, если явно не разрешено.
+- Read: <paths/sources>
+- Modify: <exact paths; empty = no writes>
+- Create: <files/limited directories, including the report>
+- Delete: <nothing by default>
+- Commands: <commands, working directory, side effects>
+- Prohibited: <additional constraints>
+- Nested delegation: prohibited unless explicitly allowed.
 
-Нужны дополнительные права/решения — сообщить координатору до зависимой работы.
-Не писать параллельно с другим агентом в те же файлы.
+If additional permissions or decisions are needed, notify the coordinator before
+dependent work. Do not write to the same files concurrently with another agent.
 
-## Передача результата
+## Handoff
 
-Сохранить отдельный самодостаточный отчёт по шаблону docs/sdd/report-template.md,
-указать путь координатору. Не хранить единственное доказательство в этом задании:
-после подготовки коммит-месседжа завершённое задание может быть удалено.
+Save a separate self-contained report using docs/sdd/report-template.md and send
+its path to the coordinator. Do not keep the only evidence in this assignment:
+completed assignments may be deleted after the commit message is prepared.

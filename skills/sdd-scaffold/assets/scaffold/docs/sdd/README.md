@@ -1,114 +1,117 @@
-# Универсальный процесс SDD
+# Universal SDD workflow
 
-Обсуждение ведёт координатор, реализацию выполняют субагенты.
-Общие правила и полные правила постоянных ролей — в [AGENTS.md](../../AGENTS.md).
-Этот файл описывает порядок работы, а не настраивает runtime.
+The coordinator leads discussions; subagents perform implementation.
+Shared rules and complete permanent role definitions are in [AGENTS.md](../../AGENTS.md).
+This file describes the workflow; it does not configure the runtime.
 
-## Структура
+## Structure
 
 ```text
 AGENTS.md
 docs/
   architecture/
-    README.md                 # Общая архитектура
-    components/               # Отдельный документ на компонент
-  agents/<agent-name>.md       # Проектные роли, не постоянные универсальные
-  specs/<spec-id>.md           # Согласованные требования и приёмка
-  tasks/<agent-name>/<id>.md   # Временные конкретные поручения
-  tests/                      # Тесткейсы и ТЗ; исполняемые тесты зависят от стека
+    README.md                 # Overall architecture
+    components/               # One document per component
+  agents/<agent-name>.md       # Project roles, not permanent universal roles
+  specs/<spec-id>.md           # Approved requirements and acceptance
+  tasks/<agent-name>/<id>.md   # Temporary individual assignments
+  tests/                      # Cases and requirements; executable tests depend on the stack
   changelog/
-    flags.md                  # Решения человека
-    reviewer/issues.md        # Исправления реализации
-    <agent-name>/             # Постоянные отчёты
-    summaries/                # Итоговые сводки наборов между коммитами
-  commits/                    # Запрошенные коммит-месседжи
-  sdd/                        # Процесс и универсальные шаблоны
+    flags.md                  # Human decisions
+    reviewer/issues.md        # Implementation fixes
+    <agent-name>/             # Permanent reports
+    summaries/                # Batch summaries between commits
+  commits/                    # Requested commit messages
+  sdd/                        # Workflow and universal templates
 ```
 
-Имена documenter, test-analyst, test-writer, reviewer постоянны. Остальные роли
-координатор определяет по проекту и хранит в docs/agents. Runtime-ID запуска
-не становится именем роли и не меняет пути её истории.
+The names documenter, test-analyst, test-writer, and reviewer are permanent.
+The coordinator defines other roles for the project in docs/agents. A run's
+runtime ID does not become a role name or change its history paths.
 
-## Один цикл
+## One cycle
 
-1. Обсудить цель, сценарии, ограничения. Исследование до согласования допускается
-   в явно назначенных границах, без реализации продукта.
-2. Подготовить docs/specs/<id>.md по [шаблону](spec-template.md), согласовать
-   конкретную версию с человеком и записать настоящее подтверждение.
-3. Создать отдельные [задания](task-template.md) в docs/tasks/<agent-name>/.
-   Указать точные границы файлов, команд, побочных записей и зависимости.
-4. Исполнители выполняют задания и сами сохраняют [отчёты](report-template.md)
-   в docs/changelog/<agent-name>/; на исправления пишут новые отчёты.
-5. Test-analyst составляет [кейсы](testcase-template.md) и
-   [ТЗ автотестов](autotest-task-template.md); test-writer реализует тесты.
-   Аналитик запускает их и оценивает результат. Для изменения без исполняемого
-   кода координатор назначает соразмерные проверки документов.
-6. Reviewer проверяет связанный набор целиком перед documenter. Замечания ведёт
-   в [issues](../changelog/reviewer/issues.md), координатору сообщает статус/путь.
-   Координатор читает список, организует исправления; аналитик повторяет
-   затронутые тесты, reviewer проверяет исправление и сохраняет доказательства
-   до очистки списка. Допустимы промежуточные ревью, итоговое остаётся обязательным.
-7. Documenter читает отчёты и оба рабочих списка, обновляет документацию, включая
-   архитектуру утверждённых изменений. В [flags](../changelog/flags.md) выносит
-   только вопросы человеку, не переписывает туда issues целиком.
-8. Человек решает флаги; координатор запускает нужные исправления и повторные
-   проверки. Documenter сверяет новые отчёты с flags и сохраняет историю решений
-   до удаления закрытых пунктов. Вопрос человеку можно вынести сразу при обнаружении.
-9. Documenter готовит [сводку](summary-template.md) подтверждённых изменений.
-   Человек принимает готовый набор отдельно от согласования требований.
-10. Только по запросу и после принятия набора, проверок и очистки issues/flags
-    documenter готовит [коммит-месседж](commit-message-template.md).
-    Затем удаляет только завершённые задания принятого набора, предварительно
-    сохранив самодостаточную историю их содержания, AC и результатов. Будущие
-    и незавершённые задания остаются. Коммит выполняется только с разрешения человека.
+1. Discuss goals, scenarios, and constraints. Investigation before approval is
+   allowed within explicitly assigned boundaries, without product implementation.
+2. Prepare docs/specs/<id>.md using the [template](spec-template.md), obtain
+   human approval of a specific version, and record actual confirmation.
+3. Create individual [assignments](task-template.md) in docs/tasks/<agent-name>/.
+   Specify exact file and command boundaries, side effects, and dependencies.
+4. Executors perform assignments and save their own [reports](report-template.md)
+   in docs/changelog/<agent-name>/. Write new reports for fixes.
+5. Test-analyst prepares [cases](testcase-template.md) and
+   [automated test requirements](autotest-task-template.md); test-writer implements
+   the tests. The analyst runs them and assesses results. For changes without
+   executable code, the coordinator assigns proportional documentation checks.
+6. Reviewer checks the related batch as a whole before documenter. Track findings
+   in [issues](../changelog/reviewer/issues.md); send the coordinator status and a
+   path. The coordinator reads the list and organizes fixes; the analyst repeats
+   affected tests, and reviewer verifies fixes and preserves evidence before
+   clearing items. Intermediate reviews are allowed; final review is still required.
+7. Documenter reads reports and both working lists, then updates documentation,
+   including architecture for approved changes. Add only questions for the user
+   to [flags](../changelog/flags.md), rather than copying the entire issues list.
+8. The user resolves flags; the coordinator arranges necessary fixes and repeated
+   checks. Documenter reconciles new reports with flags and preserves decisions
+   before removing resolved items. Questions may be raised as soon as discovered.
+9. Documenter prepares a [summary](summary-template.md) of confirmed changes.
+   Human acceptance of the finished batch is separate from approval of requirements.
+10. Only on request, after acceptance, validation, and clearing issues/flags,
+    documenter prepares a [commit message](commit-message-template.md). Then delete
+    only completed assignments in the accepted batch, first preserving a
+    self-contained history of their contents, AC, and results. Keep future and
+    unfinished assignments. Committing requires human authorization.
 
-Внутри согласованных границ не нужны подтверждения каждой подзадачи. Изменение
-требований требует нового согласования. Если после приёмки/сообщения появились
-изменения, актуализировать затронутые проверки, документы, сводку и сообщение;
-нельзя считать ранее проверенный набор автоматически проверенным снова.
+Within approved boundaries, each subtask does not need separate confirmation.
+Changes to requirements require renewed approval. If changes follow acceptance
+or message preparation, update affected checks, documents, the summary, and the
+message. A previously validated batch is not automatically validated again.
 
-## Рабочие списки и история
+## Working lists and history
 
-Issues принадлежит reviewer: дефекты реализации, ID, серьёзность, место,
-последствия и условие закрытия. Flags принадлежит documenter: решения человека,
-ID, источник и условие закрытия. Если дефект требует такого решения, списки
-ссылаются друг на друга, не становятся одинаковыми реестрами.
-Очищенный список — только заголовок и описание назначения, без пустых секций,
-таблиц и записей «нет проблем». Нельзя удалять проблему без проверенного решения.
-Доказательства закрытия остаются в датированных отчётах и итоговой сводке.
+Reviewer owns issues: implementation defects, IDs, severity, locations,
+consequences, and closure conditions. Documenter owns flags: human decisions,
+IDs, sources, and closure conditions. If a defect needs a human decision, the
+lists reference each other without becoming duplicate registers.
+A cleared list contains only its heading and purpose description, without empty
+sections, tables, or entries saying "no issues". Do not remove an issue without
+verified resolution. Preserve closure evidence in dated reports and the summary.
 
-## Имена файлов и границы коммитов
+## Filenames and commit boundaries
 
-Для отчётов, сводок и коммит-месседжей:
-`YYYY-MM-DD_HHmmss_slug.md`. Часовой пояс заготовки:
-`Asia/Novokuznetsk (UTC+07:00)`; внутри документа указывать время с offset.
-Использовать фактическое время; при совпадении секунды добавлять суффикс.
-При переносе часовой пояс можно явно изменить до начала записей.
+For reports, summaries, and commit messages:
+`YYYY-MM-DD_HHmmss_slug.md`. The scaffold's time zone is
+`Asia/Novokuznetsk (UTC+07:00)`; include a timestamp with an offset in each document.
+Use actual time; add a suffix if timestamps collide within a second.
+When transferring the scaffold, the time zone may be explicitly changed before
+records begin.
 
-Сводка указывает базовый реальный коммит и конечную точку набора. До коммита
-это рабочее дерево, после — фактический хеш, если он уже известен. Для нового
-репозитория без HEAD явно указать отсутствие базового коммита. Сверять и staged,
-и unstaged, и новые файлы, не менять index. Не включать чужие изменения в набор.
-Очистка заданий — часть описываемого набора, её отражают в сводке/сообщении.
+A summary identifies the actual base commit and the batch endpoint. Before
+committing, the endpoint is the working tree; afterwards, use the actual hash
+if known. For a new repository without HEAD, explicitly state that no base commit
+exists. Check staged, unstaged, and new files without changing the index.
+Do not include others' changes in the batch. Assignment cleanup is part of the
+batch and must be reflected in the summary and message.
 
-## Запуск и ограничения
+## Launch and limitations
 
-AGENTS.md содержит инструкции проекта, но файлы ролей не регистрируют агентов.
-Координатор явно передаёт роль, правила и задание; агент читает их перед работой.
-Модели и reasoning — выбранные человеком параметры, а не автоматически
-применяемая конфигурация. Поддержку проверяют по реальным инструментам среды.
-Несовместимость выносится человеку без скрытой замены модели.
-При запуске с новым контекстом все нужные файлы должны быть перечислены явно.
+AGENTS.md contains project instructions, but role files do not register agents.
+The coordinator explicitly passes the role, rules, and assignment; the agent reads
+them before working. Models and reasoning levels are user-selected parameters,
+not automatically applied configuration. Check support against actual environment
+tools. Refer incompatibilities to the user without silently substituting models.
+When launching with a new context, explicitly list every required file.
 
-Файловая система общая; разрешённые пути и команды задают поведение.
-Технические права обеспечивает sandbox среды. Эти документы не создают
-отдельную файловую изоляцию и не обходят согласования среды.
+The filesystem is shared; allowed paths and commands define behavior.
+The environment's sandbox enforces technical permissions. These documents do not
+provide separate filesystem isolation or bypass environment approvals.
 
-## Перенос в другой проект
+## Transferring to another project
 
-Переносить AGENTS.md, процесс, шаблоны и общие README структуры docs.
-Не переносить .git, IDE-файлы, секреты и настройки доступа. Старые проектные
-спецификации, задания, отчёты, сводки и коммит-месседжи не являются универсальной
-частью заготовки. Их исключение/очистка в целевом проекте — отдельное явное действие,
-а не автоматическое удаление. Заново проверить модели, часовой пояс и команды.
-Продукт и архитектуру определять только из согласованных требований нового проекта.
+Transfer AGENTS.md, the workflow, templates, and generic docs structure READMEs.
+Do not transfer .git, IDE files, secrets, or access settings. Old project
+specifications, assignments, reports, summaries, and commit messages are not
+universal scaffold content. Excluding or clearing them in the target project
+requires a separate explicit action; do not delete them automatically. Recheck
+models, time zone, and commands. Derive the product and architecture only from
+the new project's approved requirements.

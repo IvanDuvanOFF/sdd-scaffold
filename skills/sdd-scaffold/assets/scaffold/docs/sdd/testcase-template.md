@@ -1,17 +1,17 @@
-# <TC-id>: <сценарий>
+# <TC-id>: <scenario>
 
-- Спецификация / версия / AC: <связь с требованиями>
-- Автор: test-analyst
-- Тип: <позитивный / ошибка / граница / регрессия>
-- Предусловия и данные: <описание>
+- Specification / version / AC: <requirements traceability>
+- Author: test-analyst
+- Type: <positive / error / boundary / regression>
+- Preconditions and data: <description>
 
-## Шаги и ожидания
+## Steps and expectations
 
-| Шаг | Действие | Ожидаемый результат |
+| Step | Action | Expected result |
 | --- | --- | --- |
-| 1 | <действие> | <наблюдаемое условие> |
+| 1 | <action> | <observable condition> |
 
-## Проверка
+## Verification
 
-<Автоматизация или ручной сценарий; очистка данных, если нужна.
-Ссылки на ТЗ и отчёты запусков; результаты хранятся в отчётах, не выдумываются.>
+<Automation or manual scenario; data cleanup if needed.
+Links to requirements and execution reports; results belong in reports and must not be invented.>

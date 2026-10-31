@@ -1,18 +1,18 @@
-# <дата и время>: <краткий заголовок набора>
+# <date and time>: <short batch title>
 
-- Время: <YYYY-MM-DDTHH:mm:ss+07:00>
-- Набор / сводка: <ссылка>
-- Основание: <запрос сообщения и принятие набора человеком>
+- Time: <YYYY-MM-DDTHH:mm:ss+07:00>
+- Batch / summary: <link>
+- Basis: <message request and human acceptance of the batch>
 
-## Сообщение для Git
+## Git message
 
 ```text
-<краткое описание изменения>
+<brief description of the change>
 
-<при необходимости: причина, поведение и значимые детали>
+<if needed: reason, behavior, and significant details>
 ```
 
-В блоке сообщения не должно быть Co-authored-by и иных подписей/трейлеров агентов.
-До заполнения: необходимые проверки выполнены, оба рабочих списка очищены,
-история сохранена. После подготовки documenter удаляет только завершённые задания
-принятого набора и актуализирует сводку. Создание файла не выполняет git commit.
+The message block must not contain Co-authored-by or other agent signatures/trailers.
+Before filling it in: required checks are complete, both working lists are clear,
+and history is preserved. Afterwards, documenter removes only completed assignments
+in the accepted batch and updates the summary. Creating this file does not run git commit.

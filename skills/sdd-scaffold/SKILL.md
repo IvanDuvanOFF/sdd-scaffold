@@ -1,60 +1,64 @@
 ---
 name: sdd-scaffold
-description: "Создать универсальную структуру SDD / Spec-Driven Development в новом или существующем проекте: правила координатора и субагентов, архитектурную документацию, задания, отчёты, тесткейсы и шаблоны. Используй при просьбах «создай структуру для SDD», «настрой SDD в проекте», «создай SDD-заготовку» или initialize an SDD scaffold. Не нужен для обычного исполнения уже настроенного SDD-процесса."
+description: "Create a universal SDD / Spec-Driven Development structure in a new or existing project: coordinator and subagent rules, architecture documentation, assignments, reports, test cases, and templates. Use for requests such as create an SDD structure, set up SDD in this project, create an SDD scaffold, or initialize an SDD scaffold. Not needed for ordinary execution of an already configured SDD workflow."
 ---
 
-# Создание структуры SDD
+# Creating an SDD structure
 
-Создай документационную заготовку из [assets/scaffold](assets/scaffold/).
-Она автономна: исходный проект и его история не требуются. Явные указания
-пользователя и существующие правила целевого проекта имеют приоритет.
+Create a documentation scaffold from [assets/scaffold](assets/scaffold/).
+It is self-contained: the source project and its history are not required.
+Explicit user instructions and existing target project rules take precedence.
 
-## Применение
+## Applying the skill
 
-1. Определи целевой корень из запроса или текущей рабочей директории. Прочитай
-   применимые AGENTS.md и существующие документы, не трогая секреты. Не выбирай
-   стек и не придумывай продукт, архитектуру или согласование требований.
-2. Запусти предварительный просмотр, указав абсолютный путь к этому навыку:
+1. Determine the target root from the request or current working directory.
+   Read applicable AGENTS.md files and existing documentation without accessing
+   secrets. Do not choose a stack or invent a product, architecture, or approval
+   of requirements.
+2. Preview the changes using the absolute path to this skill:
 
    ```text
    python3 <skill-dir>/scripts/scaffold.py --target <project-dir> --dry-run
    ```
 
-   Генератор показывает создаваемые, совпадающие и конфликтующие пути, не пишет
-   при конфликте и не проходит через символьные ссылки. Существующие файлы
-   никогда не перезаписываются генератором; повторный запуск не очищает историю.
-3. Если конфликтов нет, выполни ту же команду без `--dry-run`. При доступных
-   субагентах делегируй создание ограниченному исполнителю: явно передай этот
-   навык, целевой корень, разрешённые файлы и ожидаемый результат. При отсутствии
-   инструментов субагентов сообщи об ограничении; документационную заготовку можно
-   подготовить напрямую, это не разрешает самостоятельную реализацию продукта.
-4. При существующих отличающихся AGENTS.md или документах сначала изучи различия.
-   Сохрани все проектные правила и данные; дополняй совместимые документы вручную
-   в рамках запроса, не заменяя их целиком. Содержательный конфликт требований,
-   который нельзя разрешить из контекста, вынеси пользователю. Для обычного
-   создания недостающих файлов отдельное согласование не требуется. Права среды
-   остаются обязательными; навык не обходит sandbox и запросы доступа.
-5. Проверь выбранные в AGENTS.md модели и reasoning по инструментам целевой среды.
-   Это предпочтения пользователя, а не применённая runtime-конфигурация. Не
-   подменяй недоступную конфигурацию. Если она заведомо не поддерживается,
-   создай новый флаг с ID, источником, последствиями и условием закрытия в
-   `docs/changelog/flags.md`, сообщи человеку; соответствующую роль не запускай.
-   Если доступность проверить нельзя, честно обозначь это, не объявляй её
-   подтверждённой. Не переноси флаги и утверждения о среде из других проектов.
-6. Проверь локальные ссылки созданных документов, сохранность прежних файлов и
-   отсутствие чужой истории. Кратко сообщи созданные пути, результаты и ограничения.
+   The generator lists paths to create, identical files, and conflicts. It does
+   not write when conflicts exist or traverse symbolic links. It never overwrites
+   existing files; running it again does not clear history.
+3. If there are no conflicts, run the same command without `--dry-run`. When
+   subagents are available, delegate creation to an executor with an explicit
+   scope: provide this skill, the target root, allowed files, and expected result.
+   If subagent tools are unavailable, disclose that limitation. The documentation
+   scaffold may be prepared directly; this does not authorize direct product
+   implementation.
+4. If existing AGENTS.md or other documents differ, inspect the differences first.
+   Preserve all project rules and data. Add compatible content manually within
+   the request's scope instead of replacing entire documents. Refer substantive
+   requirement conflicts to the user when context does not resolve them. Routine
+   creation of missing files needs no separate confirmation. Environment
+   permissions still apply; this skill does not bypass sandbox or access approvals.
+5. Check the models and reasoning levels selected in AGENTS.md against the target
+   environment's tools. These are user preferences, not applied runtime settings.
+   Do not substitute an unavailable configuration. If a combination is known to
+   be unsupported, create a new flag with an ID, source, consequences, and closure
+   condition in `docs/changelog/flags.md`, notify the user, and do not start that
+   role. If availability cannot be checked, state that limitation rather than
+   claiming support. Do not import other projects' flags or environment claims.
+6. Check local links in generated documents, preservation of existing files, and
+   absence of another project's history. Briefly report created paths, validation
+   results, and limitations.
 
-## Границы результата
+## Output boundaries
 
-Заготовка содержит AGENTS.md и docs/{architecture,agents,specs,tasks,tests,
-changelog,commits,sdd}. Полные правила documenter, test-analyst, test-writer и
-reviewer находятся в корневом AGENTS.md; новые проектные роли — в docs/agents/.
-Восемь шаблонов и подробный процесс — в docs/sdd/.
+The scaffold contains AGENTS.md and docs/{architecture,agents,specs,tasks,tests,
+changelog,commits,sdd}. Complete rules for documenter, test-analyst, test-writer,
+and reviewer are in the root AGENTS.md; new project roles belong in docs/agents/.
+Eight templates and the detailed workflow are in docs/sdd/.
 
-Рабочие списки issues/flags начинают с заголовка и описания. Реальные задачи,
-спецификации, отчёты, сводки и коммит-месседжи создаются только по текущей работе;
-шаблон не означает выполнение или одобрение задачи. Запрос на заготовку уже
-разрешает её создание, отдельная спецификация продукта для этого не нужна.
-Не запускай test-writer ради создания документации и не устанавливай зависимости.
-Не делай коммит, публикацию, очистку существующих задач или изменение настроек
-моделей. Файлы содержат инструкции, технические права задаёт среда.
+The issues/flags lists initially contain only a heading and purpose description.
+Real assignments, specifications, reports, summaries, and commit messages are
+created only for current work. A template does not imply completion or approval.
+The scaffold request already authorizes its creation; a separate product
+specification is not needed for this step. Do not start test-writer just to create
+documentation. Do not install dependencies. Do not commit, publish, clear existing
+assignments, or change model settings. Files provide instructions; the environment
+enforces technical permissions.

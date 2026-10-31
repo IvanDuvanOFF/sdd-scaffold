@@ -1,108 +1,111 @@
 # SDD Scaffold
 
-Навык Codex для создания структуры Spec-Driven Development: обсуждение требований
-с координатором, реализация субагентами, проверки, ревью и документация.
-Заготовка не выбирает продукт, стек или архитектуру за пользователя.
+A Codex skill for creating a Spec-Driven Development structure: discuss requirements
+with a coordinator, delegate implementation to subagents, then validate, review,
+and document the results. The scaffold does not choose a product, technology stack,
+or architecture on the user's behalf.
 
-## Что создаётся
+## What it creates
 
-- `AGENTS.md` с общими правилами и ролями `documenter`, `test-analyst`, `test-writer`, `reviewer`.
-- `docs/architecture/` для общей архитектуры и компонентов.
-- `docs/agents/`, `docs/specs/`, `docs/tasks/` для проектных ролей, спецификаций и заданий.
-- `docs/tests/` для тесткейсов и ТЗ на автотесты.
-- `docs/changelog/` для отчётов, замечаний ревьюера, вопросов человеку и сводок.
-- `docs/commits/` для запрошенных коммит-месседжей и `docs/sdd/` с восемью шаблонами.
+- `AGENTS.md` with shared rules and the `documenter`, `test-analyst`, `test-writer`, and `reviewer` roles.
+- `docs/architecture/` for overall architecture and individual components.
+- `docs/agents/`, `docs/specs/`, and `docs/tasks/` for project roles, specifications, and assignments.
+- `docs/tests/` for test cases and automated test requirements.
+- `docs/changelog/` for reports, review issues, questions for the user, and summaries.
+- `docs/commits/` for requested commit messages and `docs/sdd/` with eight templates.
 
-Полные правила находятся в [навыке](skills/sdd-scaffold/SKILL.md),
-а порядок работы — в [шаблоне процесса](skills/sdd-scaffold/assets/scaffold/docs/sdd/README.md).
-История исходного проекта в пакет не включена.
+See the [skill instructions](skills/sdd-scaffold/SKILL.md) and the
+[workflow template](skills/sdd-scaffold/assets/scaffold/docs/sdd/README.md).
+The source project's history is not included in this package.
 
-## Установка на другое устройство
+## Installing on another device
 
-Репозиторий пока локальный, удалённый репозиторий не опубликован.
-Для передачи другому человеку или на другое устройство можно скопировать папку
-репозитория либо создать Git bundle после первого коммита.
-Из корня репозитория выполните:
+This repository is currently local; no remote repository has been published.
+To share it with someone or transfer it to another device, copy the repository
+directory or create a Git bundle after the first commit. From the repository root:
 
 ```text
 git bundle create ../sdd-scaffold.bundle --all
 ```
 
-Передайте файл `sdd-scaffold.bundle` получателю. На другом устройстве с Git
-создайте копию репозитория в отсутствующем каталоге:
+Send `sdd-scaffold.bundle` to the recipient. On another device with Git installed,
+clone it into a directory that does not already exist:
 
 ```text
 git clone /path/to/sdd-scaffold.bundle sdd-scaffold
 ```
 
-Замените `/path/to/sdd-scaffold.bundle` действительным путём к переданному файлу.
-Затем скопируйте целиком папку `skills/sdd-scaffold` в пользовательский каталог
-навыков: `$CODEX_HOME/skills/sdd-scaffold`, если задан `CODEX_HOME`, иначе
-`~/.codex/skills/sdd-scaffold`. На Windows `~` означает домашнюю папку пользователя.
-Перед копированием проверьте, что папки назначения нет; существующий навык
-сначала сохраните отдельно и явно решите, какую версию оставить. Не копируйте
-файлы внутрь старой версии с перезаписью. Сам репозиторий можно хранить в любом месте.
+Replace `/path/to/sdd-scaffold.bundle` with the actual path to the transferred file.
+Then copy the entire `skills/sdd-scaffold` directory into your user skills directory:
+`$CODEX_HOME/skills/sdd-scaffold` if `CODEX_HOME` is set, or otherwise
+`~/.codex/skills/sdd-scaffold`. On Windows, `~` refers to your user home directory.
+Before copying, check that the destination directory does not exist. Back up an
+existing skill separately and explicitly decide which version to keep. Do not
+merge files into an older version by overwriting them. The repository itself can
+be stored anywhere.
 
-Откройте новый диалог Codex в нужном проекте, чтобы навык был доступен для выбора.
+Open a new Codex conversation in the target project so the skill is available
+for selection.
 
-## Установка после публикации на GitHub
+## Installing after publication on GitHub
 
-Если репозиторий будет опубликован, можно попросить Codex установить навык по ссылке:
+If the repository is published, ask Codex to install the skill using its URL:
 
 ```text
-Используй $skill-installer и установи навык из
+Use $skill-installer to install the skill from
 https://github.com/OWNER/sdd-scaffold/tree/main/skills/sdd-scaffold
 ```
 
-`OWNER` — имя будущего владельца репозитория. Это пример ссылки, а не адрес
-опубликованного репозитория. Для приватного репозитория нужен доступ с устройства
-установки. Существующий одноимённый навык установщик не заменяет.
-Для ручной установки после публикации можно клонировать репозиторий и выполнить
-описанное выше копирование папки навыка:
+`OWNER` is the future repository owner's account name. This is an example URL,
+not a published repository address. A private repository requires access from
+the device performing the installation. The installer does not replace an
+existing skill with the same name. For manual installation after publication,
+clone the repository and copy the skill directory as described above:
 
 ```text
 git clone https://github.com/OWNER/sdd-scaffold.git
 ```
 
-## Использование
+## Usage
 
-Попросите:
-
-```text
-Создай структуру для SDD в этом проекте.
-```
-
-Или явно вызовите навык:
+Ask:
 
 ```text
-Используй $sdd-scaffold для настройки этого проекта.
+Create an SDD structure in this project.
 ```
 
-Есть предварительный просмотр генератора; нужен Python 3:
+Or invoke the skill explicitly:
+
+```text
+Use $sdd-scaffold to set up this project.
+```
+
+The generator supports a preview and requires Python 3:
 
 ```text
 python3 skills/sdd-scaffold/scripts/scaffold.py --target /path/to/project --dry-run
 ```
 
-После проверки путей уберите `--dry-run`, чтобы создать отсутствующие файлы.
-Команда показана для запуска из корня этого репозитория; используйте доступное
-в вашей системе имя команды Python и действительный путь к проекту.
-Генератор не перезаписывает отличающиеся существующие файлы. При конфликтах
-Codex сначала изучает текущие правила и дополняет совместимые документы,
-а вопросы о противоречащих требованиях возвращает человеку.
+After checking the paths, remove `--dry-run` to create missing files. This command
+assumes the repository root is the working directory; use the Python command
+available on your system and the actual target project path. The generator does
+not overwrite existing files with different contents. If conflicts occur, Codex
+first examines the current rules and adds compatible documentation. Conflicting
+requirements are referred to the user.
 
-## Возможности среды
+## Environment capabilities
 
-В заготовке сохранены предпочтения моделей: Terra 6.1 / xhigh для документатора,
-Sol 6.1 / medium для аналитика и Luna 6 / ultra для писателя тестов; reviewer
-наследует модель координатора. Доступность каждого сочетания проверяется
-в среде применения. Недоступная конфигурация не заменяется молча, а становится
-вопросом человеку; затронутая роль до решения не запускается.
+The scaffold preserves these model preferences: Terra 6.1 / xhigh for the
+documenter, Sol 6.1 / medium for the analyst, and Luna 6 / ultra for the test writer;
+the reviewer inherits the coordinator's model. Check each combination in the
+target environment. An unavailable configuration is not silently substituted:
+it becomes a question for the user, and the affected role is not started until
+that question is resolved.
 
-Markdown-файлы описывают поведение агентов. Они не регистрируют инструменты,
-не настраивают модели автоматически и не обеспечивают файловую изоляцию.
-Запуск субагентов и права доступа зависят от среды. Время отчётов по умолчанию —
-Asia/Novokuznetsk (UTC+07:00); его можно явно изменить до начала записей.
+Markdown files describe agent behavior. They do not register tools, configure
+models automatically, or enforce filesystem isolation. Subagent support and
+access permissions depend on the environment. Report timestamps default to
+Asia/Novokuznetsk (UTC+07:00); this can be explicitly changed before records begin.
 
-Установка этого навыка сама по себе не создаёт коммиты, не публикует проект
-и не переносит чужие задачи или отчёты.
+Installing this skill does not itself create commits, publish a project,
+or import another project's tasks or reports.

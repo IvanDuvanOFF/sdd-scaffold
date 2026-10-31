@@ -1,6 +1,6 @@
-# Замечания к реализации
+# Implementation review issues
 
-Reviewer ведёт здесь открытые замечания с ID, серьёзностью, источником,
-последствиями и условием закрытия. После повторной проверки сохраняет
-доказательства в датированном отчёте, затем удаляет закрытые пункты.
-Перед коммит-месседжем остаются только этот заголовок и описание.
+Reviewer maintains open issues here with an ID, severity, source, consequences,
+and closure condition. After verification, preserve evidence in a dated report,
+then remove closed items. Before a commit message, only this heading and
+description remain.

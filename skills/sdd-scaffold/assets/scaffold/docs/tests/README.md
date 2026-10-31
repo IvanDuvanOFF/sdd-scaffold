@@ -1,9 +1,11 @@
-# Тесткейсы и ТЗ автотестов
+# Test cases and automated test requirements
 
-Test-analyst пишет кейсы по [шаблону](../sdd/testcase-template.md) и
-[ТЗ автоматизации](../sdd/autotest-task-template.md), связывая их со спецификацией
-и AC. Test-writer реализует проверки, test-analyst запускает и оценивает результат.
+Test-analyst writes cases using the [template](../sdd/testcase-template.md) and
+[automation requirements](../sdd/autotest-task-template.md), linking them to the
+specification and AC. Test-writer implements tests; test-analyst runs them and
+assesses the results.
 
-Здесь только описательная документация. Исполняемые тесты и команды определяются
-стеком проекта, который пока не выбран. Отчёты запусков с реальными результатами
-хранятся в docs/changelog/test-analyst/. Изменения без кода проверяются соразмерно.
+This directory contains descriptive documentation only. Executable tests and
+commands depend on the project's stack, which has not yet been chosen. Save
+execution reports with actual results in docs/changelog/test-analyst/.
+Changes without code receive proportional validation.

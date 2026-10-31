@@ -1,5 +1,5 @@
-# Вопросы, требующие решения человека
+# Questions requiring human decisions
 
-Documenter ведёт здесь открытые вопросы с ID, источником и условием закрытия.
-Перед удалением решённого пункта сохраняет решение и доказательства в постоянном
-отчёте или сводке. Перед коммит-месседжем остаются только этот заголовок и описание.
+Documenter maintains open questions here with an ID, source, and closure condition.
+Before removing a resolved item, preserve the decision and evidence in a permanent
+report or summary. Before a commit message, only this heading and description remain.

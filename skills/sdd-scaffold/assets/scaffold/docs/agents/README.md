@@ -1,11 +1,11 @@
-# Проектные агенты
+# Project agents
 
-Постоянные универсальные роли полностью описаны в [AGENTS.md](../../AGENTS.md).
-Здесь хранятся только ситуативные проектные роли: <agent-name>.md по
-[шаблону](../sdd/agent-template.md). Координатор создаёт правила перед запуском
-такого исполнителя и явно передаёт их вместе с заданием.
+Permanent universal roles are fully defined in [AGENTS.md](../../AGENTS.md).
+Only situational project roles belong here: <agent-name>.md using the
+[template](../sdd/agent-template.md). The coordinator creates the rules before
+starting such an executor and explicitly passes them with the assignment.
 
-Имя роли устойчиво между запусками, например backend. Runtime-ID процесса
-не используется для путей. Одна роль может получить несколько последовательных
-заданий; параллельные назначения не должны пересекаться по записи.
-Правила роли не являются runtime-конфигурацией и не расширяют разрешения задания.
+Role names remain stable across runs, for example backend. Runtime process IDs
+are not used in paths. A role may receive several sequential assignments;
+concurrent assignments must not overlap in writes. Role rules are not runtime
+configuration and do not expand assignment permissions.

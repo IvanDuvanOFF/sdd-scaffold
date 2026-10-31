@@ -1,16 +1,16 @@
-# <agent-name>: <проектная роль>
+# <agent-name>: <project role>
 
-- Постоянное имя: <имя для docs/tasks и docs/changelog>
-- Назначение: <какие задачи решает>
-- Модель / reasoning: <явно согласованные значения либо наследуются>
-- Источники: AGENTS.md, <согласованные архитектурные документы>
+- Stable name: <name used in docs/tasks and docs/changelog>
+- Purpose: <tasks this role handles>
+- Model / reasoning: <explicitly approved settings or inherited>
+- Sources: AGENTS.md, <approved architecture documents>
 
-## Обязанности и ограничения
+## Responsibilities and constraints
 
-<Что делает и чего не решает; границы проекта, необходимые проверки.
-Этот файл не расширяет права среды и конкретного задания.>
+<What the role does and does not decide; project scope and required checks.
+This file does not expand environment or assignment permissions.>
 
-## Вход и результат
+## Input and output
 
-<Какие данные нужны; отчёт в docs/changelog/<agent-name>/ по общему шаблону.
-Координатор передаёт этот файл явно при каждом запуске роли.>
+<Required input; report in docs/changelog/<agent-name>/ using the shared template.
+The coordinator explicitly passes this file whenever the role is started.>

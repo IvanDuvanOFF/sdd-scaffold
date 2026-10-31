@@ -1,8 +1,9 @@
-# Спецификации
+# Specifications
 
-Отдельный Markdown-файл на согласуемую задачу: `<spec-id>.md`, по
-[шаблону](../sdd/spec-template.md). Записывать версию, настоящее подтверждение
-требований и отдельно принятие результата человеком. Задания удаляются только
-по правилам процесса, спецификации и постоянные доказательства сохраняются.
+Use one Markdown file per assignment requiring approval: `<spec-id>.md`, using the
+[template](../sdd/spec-template.md). Record the version, actual approval of
+requirements, and separate human acceptance of the finished result. Assignments
+are deleted only under the workflow rules; specifications and permanent evidence
+are preserved.
 
-Реальных спецификаций в новой заготовке пока нет.
+A new scaffold contains no actual specifications yet.

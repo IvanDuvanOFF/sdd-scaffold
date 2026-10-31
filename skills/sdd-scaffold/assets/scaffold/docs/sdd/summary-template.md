@@ -1,23 +1,23 @@
-# <краткий заголовок набора>
+# <short batch title>
 
-- Время: <YYYY-MM-DDTHH:mm:ss+07:00>
-- Набор / спецификация и версия: <ID>
-- База: <реальный хеш либо «коммитов ещё нет»>
-- Конечная точка: <рабочее дерево либо существующий хеш>
-- Принятие человеком: <подтверждение либо ожидается>
-- Проверенная область: <файлы; staged/unstaged/new>
+- Time: <YYYY-MM-DDTHH:mm:ss+07:00>
+- Batch / specification and version: <ID>
+- Base: <actual hash or "no commits yet">
+- Endpoint: <working tree or existing hash>
+- Human acceptance: <confirmation or pending>
+- Checked scope: <files; staged/unstaged/new>
 
-## Изменения и проверки
+## Changes and validation
 
-<Смысл изменений, исполнители, содержание завершённых задач и AC → результаты;
-ссылки на постоянные отчёты. Документация, тесткейсы, результаты ревью.>
+<Purpose of changes, executors, contents of completed assignments, and AC → results;
+links to permanent reports. Documentation, test cases, and review results.>
 
-## Решения и ограничения
+## Decisions and limitations
 
-<Закрытые issues/flags, доказательства/решения; нерешённое обозначить явно.
-Сводка может существовать до приёмки, но это не разрешает коммит-месседж.>
+<Closed issues/flags, evidence and decisions; explicitly identify unresolved items.
+A summary may exist before acceptance, but does not authorize a commit message.>
 
-## Задания и сообщение
+## Assignments and message
 
-<Что будет/было удалено после запрошенного коммит-месседжа, постоянная история
-каждого задания. Само сообщение хранится отдельно в docs/commits/.>
+<What will be/was deleted after the requested commit message; permanent history
+of each assignment. Store the message separately in docs/commits/.>

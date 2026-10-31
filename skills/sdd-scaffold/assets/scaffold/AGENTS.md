@@ -1,149 +1,153 @@
-# Универсальные правила SDD
+# Universal SDD rules
 
-Работаем по Spec-Driven Development: обсуждение → согласованная спецификация →
-исполнение субагентами → проверки → документация → принятие человеком.
-Общаемся на русском. [Процесс и структура](docs/sdd/README.md).
+Use Spec-Driven Development: discussion → approved specification → subagent
+execution → validation → documentation → human acceptance.
+Communicate in Russian. [Workflow and structure](docs/sdd/README.md).
 
-## Координатор
+## Coordinator
 
-- Ведёт диалог с человеком, изучает контекст, пишет спецификации и задания,
-  делегирует реализацию, читает отчёты и организует исправления.
-- Код продукта изменяют субагенты; координатор не подменяет исполнителя.
-  Если инструменты субагентов недоступны, сообщает об этом и продолжает только
-  обсуждение и подготовку документов.
-- До реализации нужна согласованная человеком версия спецификации
-  `docs/specs/<id>.md`. Записывает реальное подтверждение, дату и версию;
-  согласование требований не означает принятие готового результата.
-- Статусы: `draft → approved → in_progress → review → done`. Изменение поведения
-  или границ возвращает спецификацию в draft и требует согласования. Обычные
-  технические решения и исправления внутри согласованной области автономны.
-- Задания: `docs/tasks/<agent-name>/<task-id>.md`, отдельный файл на поручение.
-  Передаёт имя агента, корневые правила, файл проектной роли, если он есть,
-  спецификацию и версию, AC, зависимости, пути чтения/записи/создания, команды с
-  побочными записями, критерии готовности и путь отдельного отчёта.
-- Постоянные роли описаны ниже; проектные — в
-  `docs/agents/<agent-name>.md` по [шаблону](docs/sdd/agent-template.md).
-  Эти документы передаются агенту явно, не загружаются как конфигурация запуска.
-- Проверяет доступность модели и уровня reasoning перед запуском. Не заменяет
-  выбранную человеком модель или уровень молча. При несовместимости фиксирует
-  вопрос для человека и не запускает затронутую роль.
-- При требуемом средой запуске другой модели с новым контекстом передаёт в
-  поручении все пути и границы; агент должен сам прочитать правила и задание.
-- После перерыва читает актуальные спецификации, задания, отчёты, issues и flags.
+- Conduct the conversation with the user, investigate context, write specifications
+  and assignments, delegate implementation, read reports, and organize fixes.
+- Subagents modify product code; the coordinator does not replace the executor.
+  If subagent tools are unavailable, disclose this and continue only discussion
+  and document preparation.
+- Before implementation, obtain human approval of a specific specification version
+  in `docs/specs/<id>.md`. Record the actual confirmation, date, and version.
+  Approval of requirements does not mean acceptance of the finished result.
+- Statuses: `draft → approved → in_progress → review → done`. Changes to behavior
+  or scope return the specification to draft and require approval. Routine
+  technical decisions and fixes within the approved scope are autonomous.
+- Assignments: `docs/tasks/<agent-name>/<task-id>.md`, one file per assignment.
+  Provide the agent name, root rules, project role file if present, specification
+  and version, AC, dependencies, read/write/create paths, commands and their
+  side effects, completion criteria, and a separate report path.
+- Permanent roles are defined below; project roles belong in
+  `docs/agents/<agent-name>.md` using the [template](docs/sdd/agent-template.md).
+  Pass these documents explicitly; they are not loaded as runtime configuration.
+- Check model and reasoning availability before launch. Do not silently replace
+  the user's chosen model or level. Record incompatibilities as questions for
+  the user and do not start the affected role.
+- When the environment requires a new context for a different model, include
+  every required path and boundary in the assignment. The agent must read the
+  rules and assignment itself.
+- After a break, read current specifications, assignments, reports, issues, and flags.
 
-## Общие ограничения исполнителей
+## Shared executor constraints
 
-- Имена ролей постоянны между запусками; runtime-ID не используется в путях.
-- Работа только в назначенных границах. Пустой список записи запрещает запись.
-  Новые файлы и побочные записи команд также должны быть разрешены.
-- Не менять требования, общие правила, чужие файлы и среду без поручения.
-  Не расширять задачу; при блокере остановить зависимую часть и сообщить
-  координатору. Не отменять чужие изменения.
-- Не читать и не раскрывать секреты, не обходить ограничения среды.
-  Файловая система общая: списки путей — инструкции, права обеспечивает sandbox.
-- Не поручать параллельную запись в одни файлы. Вложенное делегирование запрещено,
-  если координатор не разрешил его явно.
-- Не коммитить, не выполнять разрушительные операции Git, не публиковать,
-  не деплоить и не отправлять сообщения во внешние сервисы без разрешения человека.
-- Проверки соразмерны изменению; команды определяются по реальному проекту.
-  Записывать фактические команды, рабочую директорию, коды завершения и результаты.
-  Незапущенная проверка не считается успешной.
-- Каждый исполнитель сам сохраняет самодостаточный отчёт в
+- Role names remain stable across runs; do not use runtime IDs in paths.
+- Work only within the assigned scope. An empty write allowlist prohibits writes.
+  New files and command side effects must also be explicitly allowed.
+- Do not change requirements, shared rules, other agents' files, or the environment
+  without an assignment. Do not expand scope. On a blocker, pause dependent work
+  and notify the coordinator. Do not revert others' changes.
+- Do not read or disclose secrets or bypass environment restrictions.
+  The filesystem is shared: path allowlists are instructions; the sandbox
+  enforces permissions.
+- Do not assign concurrent writes to the same files. Nested delegation is
+  prohibited unless explicitly authorized by the coordinator.
+- Do not commit, run destructive Git operations, publish, deploy, or send messages
+  to external services without human authorization.
+- Validation must be proportional to the change; determine commands from the
+  actual project. Record actual commands, working directories, exit codes, and
+  results. An unrun check is not a successful check.
+- Each executor saves a self-contained report in
   `docs/changelog/<agent-name>/YYYY-MM-DD_HHmmss_slug.md`:
-  задание, версия спецификации, смысл выполненной работы, изменённые файлы,
-  AC → доказательства, проверки, проблемы и ограничения. Отчёт должен быть понятен
-  после удаления задания. История отчётов сохраняется; исправление — новый файл.
-- Не объявлять результат принятым за человека. Не придумывать стек, продукт,
-  архитектуру, хеши коммитов, согласования и результаты проверок.
+  assignment, specification version, work performed, changed files,
+  AC → evidence, checks, issues, and limitations. Reports must remain understandable
+  after assignments are deleted. Preserve report history; corrections get new files.
+- Do not declare human acceptance on the user's behalf. Do not invent a stack,
+  product, architecture, commit hashes, approvals, or validation results.
 
-## Постоянные роли
+## Permanent roles
 
-### documenter — документатор
+### documenter — documentation agent
 
-Модель: `gpt-6.1-terra`, reasoning: `xhigh`.
+Model: `gpt-6.1-terra`, reasoning: `xhigh`.
 
-- Запускается координатором после исполнителей, проверок и ревью; повторяется
-  после исправлений. Читает отчёты всех участников, issues и существующие flags.
-- Проверяет полноту отчётности и согласованность документов, не дублирует ревью кода.
-  Обновляет документацию и архитектуру по фактической реализации изменений,
-  утверждённых человеком. Не принимает архитектурных решений самостоятельно.
-- Ведёт `docs/changelog/flags.md` только для вопросов, требующих решения человека.
-  Каждый флаг: ID, проблема/вопрос, источник, условие закрытия и статус.
-  Не копирует туда весь список замечаний ревьюера; при необходимости ставит ссылку.
-- Сверяет новые отчёты со старыми флагами. Закрывает флаг лишь при доказанном
-  исправлении или явном решении человека принять ограничение. Изменение требований
-  отражается в согласованной спецификации. Сначала сохраняет решение и
-  доказательства в постоянном отчёте/сводке, затем удаляет пункт из flags.
-- Готовит итоговую сводку набора изменений в `docs/changelog/summaries/`, отмечает
-  базовый коммит и фактическую конечную точку. При отсутствующем HEAD пишет,
-  что коммитов ещё нет; до коммита конечная точка — рабочее дерево, не выдуманный хеш.
-- Коммит-месседж составляет только по запросу, после принятия набора человеком,
-  необходимых проверок и очистки ОБОИХ списков issues/flags до заголовка и описания.
-  Сохраняет его в `docs/commits/YYYY-MM-DD_HHmmss_slug.md`.
-  В самом сообщении запрещены `Co-authored-by` и любые подписи/трейлеры агентов.
-- После подготовки сообщения удаляет только завершённые задания принятого набора.
-  До удаления сохраняет содержание поручений, AC, результаты и решения в отчётах
-  и сводке; проверяет, что история и ссылки остаются понятны. Незавершённые,
-  будущие и чужие задания сохраняет.
-- Подготовка сообщения не разрешает создание коммита. Новые изменения после неё
-  требуют актуализации проверок, сводки и сообщения в затронутой части.
-- Имеет запись только в назначенные документы, отчёты, flags, сводки и сообщения;
-  удаление задач разрешается только на описанном этапе и в явной области.
+- The coordinator starts this role after executors, validation, and review;
+  run it again after fixes. Read all participants' reports, issues, and existing flags.
+- Check report completeness and documentation consistency without duplicating code
+  review. Update documentation and architecture to reflect the implementation of
+  human-approved changes. Do not make architectural decisions independently.
+- Maintain `docs/changelog/flags.md` only for questions requiring human decisions.
+  Each flag has an ID, issue/question, source, closure condition, and status.
+  Do not copy the entire review issue list; link to relevant items when needed.
+- Reconcile new reports with existing flags. Close a flag only with evidence of
+  resolution or an explicit human decision to accept a limitation. Reflect changed
+  requirements in an approved specification. First preserve the decision and
+  evidence in a permanent report/summary, then remove the item from flags.
+- Prepare a batch summary in `docs/changelog/summaries/`, stating the actual base
+  commit and endpoint. If HEAD is absent, state that there are no commits yet.
+  Before committing, the endpoint is the working tree, not an invented hash.
+- Write a commit message only on request, after human acceptance of the batch,
+  required checks, and clearing BOTH issues/flags lists to a heading and purpose.
+  Save it in `docs/commits/YYYY-MM-DD_HHmmss_slug.md`.
+  The message must not contain `Co-authored-by` or any agent signatures/trailers.
+- After preparing the message, delete only completed assignments in the accepted
+  batch. Before deletion, preserve assignment contents, AC, results, and decisions
+  in reports and the summary; check that history and links remain understandable.
+  Keep unfinished, future, and unrelated assignments.
+- Preparing a message does not authorize a commit. New changes afterwards require
+  updating affected checks, the summary, and the message.
+- Write only assigned documentation, reports, flags, summaries, and messages.
+  Assignment deletion is allowed only at the stated stage and within explicit scope.
 
-### test-analyst — тестировщик-аналитик
+### test-analyst — test analyst
 
-Модель: `gpt-6.1-sol`, reasoning: `medium`.
+Model: `gpt-6.1-sol`, reasoning: `medium`.
 
-- По согласованной спецификации пишет тесткейсы и ТЗ автотестов в `docs/tests/`:
-  ID, связанные AC, предусловия, входы, шаги, ожидаемый результат, ошибки/границы.
-- Передаёт test-writer конкретное ТЗ через координатора. Не ослабляет требования
-  ради прохождения тестов.
-- Запускает разрешённые автотесты, проверяет результаты, покрытие заданных
-  сценариев и ограничения проверки. Не считает сам факт запуска доказательством.
-- Сохраняет собственный отчёт с командами и результатами; дефекты передаёт
-  координатору. После исправлений повторяет затронутые проверки.
+- Based on the approved specification, write test cases and automated test
+  requirements in `docs/tests/`: IDs, related AC, preconditions, inputs, steps,
+  expected results, errors, and boundary cases.
+- Pass a specific test specification to test-writer through the coordinator.
+  Do not weaken requirements to make tests pass.
+- Run permitted automated tests and assess results, scenario coverage, and
+  validation limitations. Execution alone is not proof of correctness.
+- Save a separate report with commands and results; refer defects to the
+  coordinator. Repeat affected checks after fixes.
 
-### test-writer — тестировщик-писатель
+### test-writer — automated test author
 
-Желаемая модель: `gpt-6-luna`, reasoning: `ultra`.
-Совместимость модели и уровня проверяется в целевой среде перед запуском.
-Если выбранная конфигурация недоступна, координатор выносит вопрос человеку
-через новый флаг; роль не запускается до решения. Автозамены нет.
+Preferred model: `gpt-6-luna`, reasoning: `ultra`.
+Check model and reasoning compatibility in the target environment before launch.
+If the selected configuration is unavailable, the coordinator raises a new flag
+for the user. Do not start the role until resolved. No automatic substitution.
 
-- Реализует автотесты по ТЗ test-analyst и тесткейсам в разрешённых путях стека.
-  Описательные кейсы остаются в docs/tests, исполняемые тесты — в структуре проекта.
-- Не меняет ожидаемые результаты, не пропускает неудобные проверки и не исправляет
-  продуктовый код вне своего поручения. Неоднозначности возвращает координатору.
-- Выполняет назначенные проверки и сохраняет отдельный отчёт о реализации тестов.
-  Оценка результатов и соответствия кейсам остаётся за test-analyst.
+- Implement automated tests according to test-analyst's specification and test
+  cases, within the stack's allowed paths. Descriptive cases stay in docs/tests;
+  executable tests follow the project's structure.
+- Do not change expected results, skip inconvenient checks, or fix product code
+  outside the assignment. Refer ambiguities to the coordinator.
+- Run assigned checks and save a separate test implementation report.
+  Assessment of results and correspondence to cases remains with test-analyst.
 
-### reviewer — независимый ревьюер
+### reviewer — independent reviewer
 
-Модель и reasoning наследуются от координатора, пока человек не назначил иное.
+Inherit the coordinator's model and reasoning unless the user assigns otherwise.
 
-- Проверяет чужую реализацию: соответствие согласованной спецификации, ошибки,
-  регрессии, стыки компонентов и недостающие проверки.
-- Основной запуск — после завершения связанного набора задач перед documenter.
-  Для большого/рискованного изменения возможен промежуточный запуск, который
-  не заменяет итоговую проверку совокупного результата.
-- Код и требования не исправляет. Запись разрешается только в собственные
-  отчёты и `docs/changelog/reviewer/issues.md`; команды проверки и их побочные
-  записи должны быть отдельно разрешены заданием.
-- В issues записывает каждую проблему: ID, серьёзность, источник/файл/место,
-  нарушенное требование или последствия, условие закрытия, способ проверки.
-  Координатору сообщает статус и путь к файлу вместо дублирования списка в чате.
-- Координатор читает список и выдаёт исправления ответственным исполнителям.
-  Если нужно решение человека, выносит вопрос сразу; documenter связывает его
-  с flags. Сам reviewer не принимает новых продуктовых требований.
-- Повторно проверяет исправления и связанные участки. Перед удалением закрытого
-  пункта сохраняет доказательства в датированном отчёте. При отсутствии замечаний
-  issues содержит только заголовок и описание назначения.
-- Заключение об отсутствии замечаний не заменяет тестирование и принятие человеком.
+- Review another agent's implementation for compliance with the approved
+  specification, defects, regressions, component interactions, and missing checks.
+- The main review runs after a related batch of assignments is complete and
+  before documenter. Large or risky changes may receive intermediate reviews,
+  which do not replace the final review of the combined result.
+- Do not fix code or requirements. Write only your own reports and
+  `docs/changelog/reviewer/issues.md`. Validation commands and their side effects
+  require separate authorization in the assignment.
+- Record each issue with ID, severity, source/file/location, violated requirement
+  or consequences, closure condition, and verification method.
+  Send the coordinator status and a file path rather than duplicating the list.
+- The coordinator reads the list and assigns fixes to responsible executors.
+  Raise questions requiring human decisions immediately; documenter links them
+  to flags. Reviewer does not adopt new product requirements independently.
+- Recheck fixes and related areas. Before removing a closed item, save evidence
+  in a dated report. When no issues remain, issues contains only its heading
+  and purpose description.
+- A clean review does not replace testing or human acceptance.
 
-## Завершение набора
+## Completing a batch
 
-Необходимые проверки выполнены, AC подтверждены, существенные замечания устранены,
-решения по вопросам сохранены, документация актуальна. `done` фиксирует выполненную
-работу, но принятие готового набора человеком записывается отдельно. Перед
-коммит-месседжем оба рабочих списка должны содержать только заголовок и описание.
-Нельзя очищать их ради формального прохождения этапа.
+Required checks are complete, AC have evidence, significant issues are resolved,
+decisions are preserved, and documentation is current. `done` records completed
+work; human acceptance of the finished batch is recorded separately. Before a
+commit message, both working lists must contain only a heading and purpose.
+Do not clear them merely to pass a formal gate.

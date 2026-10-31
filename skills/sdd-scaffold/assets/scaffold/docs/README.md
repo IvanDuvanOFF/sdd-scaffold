@@ -1,15 +1,15 @@
-# Документация проекта
+# Project documentation
 
-Заготовка универсальна: продукт, стек, команды и компоненты пока не определены.
+This scaffold is universal: the product, stack, commands, and components are not yet defined.
 
-- [Правила агентов](../AGENTS.md) и [процесс SDD](sdd/README.md).
-- [Архитектура](architecture/README.md), [компоненты](architecture/components/README.md).
-- [Проектные роли](agents/README.md), [задания](tasks/README.md).
-- [Спецификации](specs/README.md) — требования и приёмка согласованных задач.
-- [Тесткейсы и ТЗ автотестов](tests/README.md).
-- [Отчёты и рабочие списки](changelog/README.md).
-- [Сводки изменений](changelog/summaries/README.md).
-- [Коммит-месседжи](commits/README.md).
+- [Agent rules](../AGENTS.md) and [SDD workflow](sdd/README.md).
+- [Architecture](architecture/README.md), [components](architecture/components/README.md).
+- [Project roles](agents/README.md), [assignments](tasks/README.md).
+- [Specifications](specs/README.md) — requirements and acceptance of approved work.
+- [Test cases and automated test requirements](tests/README.md).
+- [Reports and working lists](changelog/README.md).
+- [Change summaries](changelog/summaries/README.md).
+- [Commit messages](commits/README.md).
 
-Шаблоны находятся в docs/sdd. Реальные задания и результаты не следует путать
-с шаблонами; перенос в новый проект описан в процессе.
+Templates are in docs/sdd. Do not confuse templates with actual assignments and
+results. The workflow describes how to transfer this structure to another project.

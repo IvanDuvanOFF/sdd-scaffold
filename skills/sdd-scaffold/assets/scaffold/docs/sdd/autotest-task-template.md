@@ -1,21 +1,21 @@
-# <AT-id>: ТЗ на автотесты
+# <AT-id>: Automated test requirements
 
-- Автор: test-analyst
-- Исполнитель: test-writer
-- Спецификация / версия: <путь и версия>
-- Тесткейсы / AC: <ID и ссылки>
+- Author: test-analyst
+- Executor: test-writer
+- Specification / version: <path and version>
+- Test cases / AC: <IDs and links>
 
-## Требования
+## Requirements
 
-<Что автоматизировать, данные, предусловия, изоляция, наблюдаемые ожидания,
-негативные/граничные сценарии; критерии достаточности.>
+<What to automate, data, preconditions, isolation, observable expectations,
+negative and boundary cases; sufficiency criteria.>
 
-## Размещение и запуск
+## Placement and execution
 
-<Известные по проекту пути исполняемых тестов, инструменты и команды, побочные
-записи. Не придумывать стек. Задание с разрешениями отдельно в docs/tasks/test-writer/.>
+<Executable test paths, tools, commands, and side effects known from the project.
+Do not invent a stack. Keep the assignment with permissions separately in docs/tasks/test-writer/.>
 
-## Приёмка
+## Acceptance
 
-<Test-writer сообщает о реализации, test-analyst запускает и оценивает результаты.
-Изменять ожидания можно только через согласование требований, не ради прохождения.>
+<Test-writer reports implementation; test-analyst runs tests and assesses results.
+Expected results may change only through requirements approval, not to make tests pass.>

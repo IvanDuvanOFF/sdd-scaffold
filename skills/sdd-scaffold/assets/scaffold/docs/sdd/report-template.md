@@ -1,22 +1,22 @@
-# <task-id>: <краткий итог>
+# <task-id>: <brief outcome>
 
-- Агент: <постоянное имя>
-- Время: <YYYY-MM-DDTHH:mm:ss+07:00>
-- Спецификация: <путь>, версия <n>
-- Задание: <ID; краткое содержание и границы, не только ссылка>
-- Состояние: <выполнено / частично / блокировано; не принятие человеком>
+- Agent: <stable name>
+- Time: <YYYY-MM-DDTHH:mm:ss+07:00>
+- Specification: <path>, version <n>
+- Assignment: <ID; brief contents and scope, not just a link>
+- Status: <complete / partial / blocked; not human acceptance>
 
-## Изменения
+## Changes
 
-<Что и почему изменено, пути; достаточно для понимания после удаления задания.>
+<What changed and why, with paths; sufficient context after assignment deletion.>
 
-## Проверки и критерии
+## Checks and criteria
 
-<AC-* → доказательства. Команда, рабочая директория, код завершения и результат.
-Незапущенные проверки и причины. Для ревью — область и ограничения.>
+<AC-* → evidence. Command, working directory, exit code, and result.
+Checks not run and reasons. For review: scope and limitations.>
 
-## Проблемы и решения
+## Issues and decisions
 
-<ID issues/flags, последствия, условие закрытия; для закрытия — фактическая
-повторная проверка или решение человека с источником, сохранённое до удаления
-пункта из рабочего списка. Исправление отчёта оформлять новым файлом.>
+<Issue/flag IDs, consequences, closure conditions. For closure: actual repeated
+verification or a human decision with its source, preserved before removing an
+item from the working list. Corrections to reports belong in new files.>

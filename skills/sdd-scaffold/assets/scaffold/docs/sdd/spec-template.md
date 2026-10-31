@@ -1,39 +1,39 @@
-# <spec-id>: <название>
+# <spec-id>: <title>
 
-- Версия: 1
-- Статус: draft
-- Согласование требований: отсутствует
-- Подтверждение: <дата, точная цитата либо ссылка на сообщение>
-- Согласованная версия: <после настоящего подтверждения>
-- Принятие результата человеком: отсутствует
+- Version: 1
+- Status: draft
+- Requirements approval: absent
+- Confirmation: <date, exact quote, or message link>
+- Approved version: <after actual confirmation>
+- Human acceptance of the result: absent
 
-## Цель и поведение
+## Goal and behavior
 
-<Проблема, пользователи, сценарии, входы, результаты, ошибки и границы.>
+<Problem, users, scenarios, inputs, results, errors, and boundaries.>
 
-## Область
+## Scope
 
-- Входит: <объём>
-- Не входит: <исключения>
-- Ограничения: <совместимость, данные, зависимости>
+- Included: <scope of work>
+- Excluded: <exceptions>
+- Constraints: <compatibility, data, dependencies>
 
-## Критерии приёмки
+## Acceptance criteria
 
-| ID | Проверяемое условие | Проверка |
+| ID | Verifiable condition | Check |
 | --- | --- | --- |
-| AC-1 | <наблюдаемый результат> | <сценарий/команда> |
+| AC-1 | <observable result> | <scenario/command> |
 
-## Решения и вопросы
+## Decisions and questions
 
-<Решения с основаниями; блокирующие вопросы разрешить до согласования.>
+<Decisions with reasons; resolve blocking questions before approval.>
 
-## Исполнение
+## Execution
 
-<Задания docs/tasks/<agent-name>/<task-id>.md, зависимости и область набора.
-После удаления заданий использовать постоянные ссылки на отчёты и сводку.>
+<Assignments docs/tasks/<agent-name>/<task-id>.md, dependencies, and batch scope.
+After assignments are deleted, use permanent links to reports and the summary.>
 
-## Приёмка и история
+## Acceptance and history
 
-<AC → доказательства; отчёты, тесткейсы, ревью, решения issues/flags,
-непроверенное и причины; реальные изменения версии/статуса и подтверждения.
-Новая версия требований не наследует старое согласование автоматически.>
+<AC → evidence; reports, test cases, review, issue/flag resolutions,
+unverified items and reasons; actual version/status changes and confirmations.
+A new requirements version does not automatically inherit previous approval.>

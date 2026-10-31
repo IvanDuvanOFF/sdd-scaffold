@@ -1,9 +1,9 @@
-# Итоговые сводки
+# Batch summaries
 
-Documenter сохраняет YYYY-MM-DD_HHmmss_slug.md по
-[шаблону](../../sdd/summary-template.md). Часовой пояс: Asia/Novokuznetsk (UTC+07:00).
+Documenter saves YYYY-MM-DD_HHmmss_slug.md using the
+[template](../../sdd/summary-template.md). Time zone: Asia/Novokuznetsk (UTC+07:00).
 
-Сводка описывает согласованный набор относительно реального базового коммита.
-До коммита конечная точка — рабочее дерево; без HEAD база отсутствует, что нужно
-указать явно. Новое изменение после проверки требует актуализации затронутых
-сведений и проверок. Не подменять сводкой отчёты или решение человека о принятии.
+A summary describes the approved batch relative to an actual base commit.
+Before committing, the endpoint is the working tree. If HEAD is absent, explicitly
+state that no base exists. Changes after validation require updating affected
+information and checks. A summary does not replace reports or human acceptance.

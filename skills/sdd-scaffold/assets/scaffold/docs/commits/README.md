@@ -1,11 +1,12 @@
-# Коммит-месседжи
+# Commit messages
 
-Documenter составляет сообщение только по запросу человека и сохраняет
-YYYY-MM-DD_HHmmss_slug.md по [шаблону](../sdd/commit-message-template.md).
-Часовой пояс: Asia/Novokuznetsk (UTC+07:00).
+Documenter prepares a message only on human request and saves
+YYYY-MM-DD_HHmmss_slug.md using the [template](../sdd/commit-message-template.md).
+Time zone: Asia/Novokuznetsk (UTC+07:00).
 
-Условия: набор принят человеком, необходимые проверки выполнены, issues и flags
-содержат только заголовок и назначение. В самом коммит-месседже запрещены
-Co-authored-by и другие подписи/трейлеры агентов. Подготовка сообщения не разрешает
-коммит. После сохранения истории documenter удаляет завершённые задания только
-этого набора. Новые изменения требуют актуализации сообщения и сводки.
+Prerequisites: human acceptance of the batch, completed required checks, and issues
+and flags containing only their heading and purpose. The commit message must not
+contain Co-authored-by or other agent signatures/trailers. Preparing a message
+does not authorize a commit. After preserving history, documenter removes only
+completed assignments in this batch. New changes require updating the message
+and summary.
