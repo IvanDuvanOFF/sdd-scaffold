@@ -1,0 +1,4 @@
+interface:
+  display_name: "SDD Scaffold"
+  short_description: "Создание структуры SDD с правилами субагентов"
+  default_prompt: "Используй $sdd-scaffold, чтобы создать структуру SDD в текущем проекте."
