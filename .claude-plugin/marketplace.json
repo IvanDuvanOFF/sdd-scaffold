@@ -1,0 +1,13 @@
+{
+  "name": "sdd-scaffold",
+  "owner": {
+    "name": "IvanDuvanOFF"
+  },
+  "plugins": [
+    {
+      "name": "sdd-scaffold",
+      "source": "./",
+      "description": "Create a Spec-Driven Development scaffold for Claude Code: CLAUDE.md coordinator rules, SDD subagents, docs structure, and templates."
+    }
+  ]
+}

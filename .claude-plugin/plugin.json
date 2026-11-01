@@ -1,0 +1,10 @@
+{
+  "name": "sdd-scaffold",
+  "version": "1.0.0",
+  "description": "Create a Spec-Driven Development scaffold for Claude Code: CLAUDE.md coordinator rules, SDD subagents, docs structure, and templates.",
+  "author": {
+    "name": "IvanDuvanOFF"
+  },
+  "repository": "https://github.com/IvanDuvanOFF/sdd-scaffold",
+  "keywords": ["sdd", "spec-driven-development", "subagents", "scaffold"]
+}

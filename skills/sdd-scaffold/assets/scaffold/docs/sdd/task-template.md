@@ -1,7 +1,7 @@
 # <task-id>: <assignment>
 
 - Agent: <stable name>
-- Role: <AGENTS.md section or docs/agents/<agent-name>.md>
+- Role: <.claude/agents/<agent-name>.md>
 - Specification: <docs/specs/<id>.md>, version <n>, approval <link>
 - Criteria: <AC-* or investigation question>
 - Status: pending
@@ -21,7 +21,7 @@ Implementation requires an approved specification.>
 - Delete: <nothing by default>
 - Commands: <commands, working directory, side effects>
 - Prohibited: <additional constraints>
-- Nested delegation: prohibited unless explicitly allowed.
+- Nested delegation: subagents do not launch other subagents.
 
 If additional permissions or decisions are needed, notify the coordinator before
 dependent work. Do not write to the same files concurrently with another agent.

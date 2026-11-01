@@ -1,18 +1,19 @@
 # Universal SDD workflow
 
 The coordinator leads discussions; subagents perform implementation.
-Shared rules and complete permanent role definitions are in [AGENTS.md](../../AGENTS.md).
-This file describes the workflow; it does not configure the runtime.
+Shared rules are in [CLAUDE.md](../../CLAUDE.md); roles are Claude Code subagents
+in `.claude/agents/`. This file describes the workflow.
 
 ## Structure
 
 ```text
-AGENTS.md
+CLAUDE.md                     # Coordinator and shared executor rules
+.claude/
+  agents/<agent-name>.md       # Subagents: permanent and project roles
 docs/
   architecture/
     README.md                 # Overall architecture
     components/               # One document per component
-  agents/<agent-name>.md       # Project roles, not permanent universal roles
   specs/<spec-id>.md           # Approved requirements and acceptance
   tasks/<agent-name>/<id>.md   # Temporary individual assignments
   tests/                      # Cases and requirements; executable tests depend on the stack
@@ -26,7 +27,7 @@ docs/
 ```
 
 The names documenter, test-analyst, test-writer, and reviewer are permanent.
-The coordinator defines other roles for the project in docs/agents. A run's
+The coordinator defines other roles for the project in .claude/agents. A run's
 runtime ID does not become a role name or change its history paths.
 
 ## One cycle
@@ -95,12 +96,18 @@ batch and must be reflected in the summary and message.
 
 ## Launch and limitations
 
-AGENTS.md contains project instructions, but role files do not register agents.
-The coordinator explicitly passes the role, rules, and assignment; the agent reads
-them before working. Models and reasoning levels are user-selected parameters,
-not automatically applied configuration. Check support against actual environment
-tools. Refer incompatibilities to the user without silently substituting models.
-When launching with a new context, explicitly list every required file.
+Claude Code loads CLAUDE.md into the coordinator session and registers every
+file in `.claude/agents/` as a subagent; its frontmatter applies the model,
+effort, and tool list. The coordinator launches a role with the Agent tool
+(`subagent_type: <agent-name>`) and passes the assignment path in the prompt.
+A subagent starts with a fresh context: it reads CLAUDE.md and the assignment
+itself, and only its final message returns to the coordinator, so reports live
+in files. Subagents do not launch other subagents.
+
+Models and effort levels in frontmatter are the user's choice. Availability
+depends on the plan, provider, and Claude Code version; if a configuration is
+unavailable, raise a flag and do not start the role. Do not silently substitute
+models or override them in the Agent call.
 
 The filesystem is shared; allowed paths and commands define behavior.
 The environment's sandbox enforces technical permissions. These documents do not
@@ -108,8 +115,9 @@ provide separate filesystem isolation or bypass environment approvals.
 
 ## Transferring to another project
 
-Transfer AGENTS.md, the workflow, templates, and generic docs structure READMEs.
-Do not transfer .git, IDE files, secrets, or access settings. Old project
+Transfer CLAUDE.md, `.claude/agents/`, the workflow, templates, and generic docs
+structure READMEs. Do not transfer .git, IDE files, secrets, `.claude/settings*.json`,
+or other access settings. Old project
 specifications, assignments, reports, summaries, and commit messages are not
 universal scaffold content. Excluding or clearing them in the target project
 requires a separate explicit action; do not delete them automatically. Recheck

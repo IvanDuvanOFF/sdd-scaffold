@@ -1,4 +1,0 @@
-interface:
-  display_name: "SDD Scaffold"
-  short_description: "Create an SDD structure with subagent rules"
-  default_prompt: "Use $sdd-scaffold to create an SDD structure in the current project."
