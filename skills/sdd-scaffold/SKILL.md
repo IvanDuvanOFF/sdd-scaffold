@@ -51,6 +51,15 @@ Explicit user instructions and existing target project rules take precedence.
    results, and limitations. Remind the user that new subagents become available
    after restarting Claude Code (or via `/agents`).
 
+## External providers
+
+The scaffold supports running a role on Codex or Grok through the companion
+`multi-provider-subagent` skill. Roles are created with Executor `claude`; do not
+change it, install the companion skill, or add `.mps-runs/` to `.gitignore` as part of
+scaffolding. If the user wants external executors, tell them to install that skill
+and change the Executor column in CLAUDE.md themselves. Mention that
+`.mps-runs/` should be gitignored.
+
 ## Output boundaries
 
 The scaffold contains CLAUDE.md, `.claude/agents/` with documenter, test-analyst,

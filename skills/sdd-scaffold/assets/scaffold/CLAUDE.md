@@ -2,7 +2,23 @@
 
 Use Spec-Driven Development: discussion → approved specification → subagent
 execution → validation → documentation → human acceptance.
-Communicate in Russian. [Workflow and structure](docs/sdd/README.md).
+[Workflow and structure](docs/sdd/README.md).
+
+## Language rules
+
+- The coordinator talks to the user in the language the user writes in.
+- Documents created for a human (architecture, specifications, flags, summaries,
+  commit messages, `docs/README.md`-style guides) are written in the language of
+  the user's conversation with the coordinator. The coordinator determines it
+  and states it in every assignment as "Human-document language".
+- Files exchanged between agents (assignments, reports, test cases, automated
+  test requirements, review issues) and subagents' final messages are always
+  written in English.
+- Subagents do not see the conversation: they use the language named in the
+  assignment for human-facing documents and English for everything else.
+- Code identifiers, paths, commands, and quoted source text are not translated.
+  Templates in `docs/sdd/` stay in English; their human-facing instances follow
+  the rules above.
 
 The main Claude Code session is the coordinator. Executors are Claude Code
 subagents defined in `.claude/agents/<agent-name>.md` and launched with the
@@ -24,7 +40,7 @@ Agent tool (`subagent_type: <agent-name>`).
 - Assignments: `docs/tasks/<agent-name>/<task-id>.md`, one file per assignment.
   Provide the agent name, root rules, specification and version, AC,
   dependencies, read/write/create paths, commands and their side effects,
-  completion criteria, and a separate report path.
+  completion criteria, a separate report path, and the human-document language.
 - Permanent roles: `documenter`, `test-analyst`, `test-writer`, `reviewer`
   (`.claude/agents/`). Project roles are created as new files in
   `.claude/agents/<agent-name>.md` using the [template](docs/sdd/agent-template.md).
@@ -78,15 +94,48 @@ Agent tool (`subagent_type: <agent-name>`).
 
 Full rules are in the agent files; the summary here is for the coordinator.
 
-| Role | File | Model / effort | Purpose |
-| --- | --- | --- | --- |
-| documenter | [.claude/agents/documenter.md](.claude/agents/documenter.md) | `sonnet` / `xhigh` | Documentation, flags, summaries, commit messages |
-| test-analyst | [.claude/agents/test-analyst.md](.claude/agents/test-analyst.md) | `sonnet` / `medium` | Test cases, automated test requirements, test runs |
-| test-writer | [.claude/agents/test-writer.md](.claude/agents/test-writer.md) | `opus` / `max` | Automated test implementation |
-| reviewer | [.claude/agents/reviewer.md](.claude/agents/reviewer.md) | `inherit` | Independent review, issues list |
+| Role | File | Executor | Model / effort | Purpose |
+| --- | --- | --- | --- | --- |
+| documenter | [.claude/agents/documenter.md](.claude/agents/documenter.md) | `claude` | `sonnet` / `high` | Documentation, flags, summaries, commit messages |
+| test-analyst | [.claude/agents/test-analyst.md](.claude/agents/test-analyst.md) | `claude` | `opus` / `high` | Test cases, automated test requirements, test runs |
+| test-writer | [.claude/agents/test-writer.md](.claude/agents/test-writer.md) | `claude` | `haiku` / `xhigh` | Automated test implementation |
+| reviewer | [.claude/agents/reviewer.md](.claude/agents/reviewer.md) | `claude` | `inherit` | Independent review, issues list |
+
+Executor `claude` is a native Claude Code subagent. `codex` or `grok` is an
+external CLI agent; see [External providers](#external-providers). Changing a
+role's executor is the user's decision, like its model and effort.
 
 Order within a batch: executors → test-analyst/test-writer → reviewer →
 documenter. Rerun affected roles after fixes.
+
+## External providers
+
+A role whose Executor is `codex` or `grok` runs through the
+`multi-provider-subagent` skill (`scripts/run_task.py`) instead of the Agent tool.
+The contract is unchanged: assignment `.md` in, report `.md` out, and only a short
+JSON status returns to the coordinator.
+
+- The external agent has no memory of the conversation and does not use
+  `.claude/agents/` frontmatter. Its role description is the agent file body; the
+  model and effort come from this table and are passed as `--model`/`--effort`
+  (`default` = the CLI's own configuration). Do not pick other values.
+- Before the first external run in a session, tell the user that project files and
+  the assignment are sent to the provider (OpenAI for `codex`, xAI for `grok`),
+  and get their go-ahead. Do not use external providers on a repository the user
+  marked private. Never put secrets in assignments.
+- Write boundaries in assignments are instructions. Codex is sandboxed to the
+  project root; Grok is not path-restricted. After each run compare the JSON
+  `changed_files` with the assignment's Modify/Create list; treat a mismatch as
+  an issue, not as success.
+- Do not mark an external run as done from its status alone. Read the report and
+  re-run the key checks, or use a `claude` reviewer. An independent review should
+  use a different executor than the one that wrote the code.
+- Missing CLI, failed login, or unavailable model: record a flag in
+  `docs/changelog/flags.md` and do not start the role. Do not silently switch
+  executors.
+- Add `.mps-runs/` (run prompts and logs) to the project's `.gitignore`.
+- Assignments for external agents must not say `Commands: none`; list the
+  read-only viewing commands that are allowed instead.
 
 ## Completing a batch
 

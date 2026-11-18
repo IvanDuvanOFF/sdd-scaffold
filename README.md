@@ -85,17 +85,36 @@ requirements are referred to the user.
 
 | Role | Model | Effort |
 | --- | --- | --- |
-| documenter | `sonnet` | `xhigh` |
-| test-analyst | `sonnet` | `medium` |
-| test-writer | `opus` | `max` |
+| documenter | `sonnet` | `high` |
+| test-analyst | `opus` | `high` |
+| test-writer | `haiku` | `xhigh` |
 | reviewer | `inherit` (coordinator's model) | default |
 
 Aliases always point to the latest model of the family. Change them in the
 frontmatter of `.claude/agents/*.md` in the target project. Availability depends
 on the plan, provider (Anthropic API, Bedrock, Vertex), and Claude Code version. An unavailable configuration is not
 silently substituted: it becomes a flag for the user, and the affected role is
-not started until it is resolved. `max` effort uses the most tokens; lower it if
+not started until it is resolved. Higher effort uses more tokens; lower it if
 that is too expensive.
+
+## External providers (Codex, Grok)
+
+Each role has an Executor in the `CLAUDE.md` role table: `claude` (a native
+subagent, the default), `codex`, or `grok`. For the latter two the coordinator
+runs the assignment through the companion
+[multi-provider-subagent](https://github.com/IvanDuvanOFF/multi-provider-subagent)
+skill. The assignment/report contract stays the same. `CLAUDE.md` adds rules for
+sending code to a third party, verifying `changed_files`, and flags for an
+unavailable CLI. To switch a role, change its Executor and model/effort in that
+table.
+
+## Language
+
+Documents for humans (architecture, specifications, flags, summaries, commit
+messages) are written in the language the user speaks to the coordinator. Files
+exchanged between agents (assignments, reports, test cases, review issues) and
+subagents' final messages are always in English. The coordinator names the
+human-document language in every assignment.
 
 ## Environment capabilities
 

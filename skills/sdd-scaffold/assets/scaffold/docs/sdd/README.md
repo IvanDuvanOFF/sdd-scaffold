@@ -109,6 +109,15 @@ depends on the plan, provider, and Claude Code version; if a configuration is
 unavailable, raise a flag and do not start the role. Do not silently substitute
 models or override them in the Agent call.
 
+A role can instead be executed by an external CLI agent (Codex or Grok) through
+the `multi-provider-subagent` skill; the executor, model, and effort per role are
+listed in CLAUDE.md. The coordinator runs
+`python <skill-dir>/scripts/run_task.py <codex|grok> docs/tasks/<agent-name>/<id>.md`
+from the project root, usually in the background, then reads the JSON and the
+report and checks `changed_files` against the assignment. The report location,
+format, and history rules are the same as for native subagents. See
+CLAUDE.md, "External providers".
+
 The filesystem is shared; allowed paths and commands define behavior.
 The environment's sandbox enforces technical permissions. These documents do not
 provide separate filesystem isolation or bypass environment approvals.

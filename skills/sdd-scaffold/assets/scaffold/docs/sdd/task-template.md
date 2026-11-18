@@ -2,8 +2,10 @@
 
 - Agent: <stable name>
 - Role: <.claude/agents/<agent-name>.md>
+- Executor: <claude | codex | grok, as in CLAUDE.md>
 - Specification: <docs/specs/<id>.md>, version <n>, approval <link>
 - Criteria: <AC-* or investigation question>
+- Human-document language: <language of the user's conversation with the coordinator>
 - Status: pending
 - Dependencies: <launch prerequisites>
 - Permanent report: <docs/changelog/<agent-name>/dated-filename.md>
@@ -19,7 +21,7 @@ Implementation requires an approved specification.>
 - Modify: <exact paths; empty = no writes>
 - Create: <files/limited directories, including the report>
 - Delete: <nothing by default>
-- Commands: <commands, working directory, side effects>
+- Commands: <commands, working directory, side effects; for codex/grok list the read-only viewing commands, never "none">
 - Prohibited: <additional constraints>
 - Nested delegation: subagents do not launch other subagents.
 

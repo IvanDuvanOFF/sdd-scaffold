@@ -18,7 +18,7 @@ Purpose: <tasks this role handles>.
 Sources: CLAUDE.md, <approved architecture documents>.
 
 Before working, read `CLAUDE.md` (shared executor constraints), `docs/sdd/README.md`,
-and the assignment whose path the coordinator gave you. Communicate in Russian.
+and the assignment whose path the coordinator gave you. Follow the language rules in `CLAUDE.md`.
 Work only within the assignment's boundaries.
 
 ## Responsibilities and constraints
@@ -35,4 +35,7 @@ Your final message to the coordinator is brief: status, report path, and blocker
 - Stable name: the same `<agent-name>` is used in `docs/tasks/` and `docs/changelog/`.
 - `tools` restricts available tools; omitting it inherits all tools of the
   session. Path boundaries are still set by the assignment.
+- Executor (`claude`, `codex`, `grok`), model, and effort are listed for the role in
+  CLAUDE.md. For `codex`/`grok` the frontmatter is ignored and only the body is
+  used as the role description.
 - Model and effort are the user's choice; do not change them without approval.
